@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const universitySchema = new mongoose.Schema({
   name:  { 
     type: String,
+    unique:true,
      required: true 
     },
   location: {
@@ -12,7 +13,9 @@ const universitySchema = new mongoose.Schema({
   phoneNumber: { 
     type: String
  },
-  logo: { type: String,
+  logo: { 
+    type: String,
+    unique:true,
      required: true 
     }
 });
