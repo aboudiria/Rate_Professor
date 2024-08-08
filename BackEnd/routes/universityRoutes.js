@@ -4,23 +4,19 @@ const {
     createUniversity, 
     getAllUniversities, 
     getUniversityById, 
-    searchUniversityByName, 
-    searchDoctorInUniversity 
+    searchDoctorInUniversity ,
+    getDoctorsByUniversity
 } = require('../controllers/universityController');
+const protectRoute= require('../middleware/protectRoute')
 
-// Route to create a university
-router.post('/universities', createUniversity);
+router.post('/create',protectRoute, createUniversity);
 
-// Route to get all universities
-router.get('/universities', getAllUniversities);
 
-// Route to get a specific university by ID
-router.get('/universities/:id', getUniversityById);
+router.get('/universities',protectRoute, getAllUniversities);
 
-// Route to search universities by name
-router.get('/universities/search', searchUniversityByName);
+router.get('/universities/:id',protectRoute ,getUniversityById);
 
-// Route to search for a doctor in a specific university
 router.get('/universities/:universityId/doctors/search', searchDoctorInUniversity);
-
+router.get('/universities/:universityId/doctors', protectRoute,getDoctorsByUniversity);
+ 
 module.exports = router;

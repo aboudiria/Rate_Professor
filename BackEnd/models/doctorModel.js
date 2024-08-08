@@ -13,21 +13,21 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  affiliations: {
+  affiliations: [{
     type: String
-  },
-  backgrounds: {
+  }],
+  backgrounds: [{
     type: String
-  },
-  teachings: {
+  }],
+  teachings: [{
     type: String
-  },
-  supervisions: {
+  }],
+  supervisions: [{
     type: String
-  },
-  experiences: {
+  }],
+  experiences: [{
     type: String
-  },
+  }],
   university: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'University',

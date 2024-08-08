@@ -12,7 +12,7 @@ const createDoctor = async (req, res) => {
     supervisions,
     experiences,
     universityId, // Changed from university to universityId for clarity
-    initialRating
+    initialRating 
   } = req.body;
 
   try {
@@ -66,19 +66,7 @@ const getAllDoctors = async (req, res) => {
   }
 };
 
-//get all doctors in a specific university
 
-const getDoctorsByUniversity = async (req, res) => {
-  const { universityId } = req.params;
-
-  try {
-    const doctors = await Doctor.find({ university: universityId });
-    res.json(doctors);
-  } catch (error) {
-    console.error('Error getting doctors by university:', error);
-    res.status(500).json({ message: 'Failed to get doctors by university.' });
-  }
-};
 
 //search doctor by name
 
@@ -139,7 +127,7 @@ const searchDoctorsByUniversityName = async (req, res) => {
           profilePic: 1,
           major: 1,
           affiliations: 1,
-          backgrounds: 1,
+          backgrounds: 1, 
           teachings: 1,
           supervisions: 1,
           experiences: 1,
@@ -199,5 +187,4 @@ const searchDoctorInUniversity = async (req, res) => {
 
 
 module.exports =
- {createDoctor,getAllDoctors,
-  getDoctorsByUniversity, searchDoctorByName, searchDoctorsByUniversityName  }; 
+ {createDoctor,getAllDoctors, searchDoctorByName, searchDoctorsByUniversityName  }; 

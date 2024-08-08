@@ -1,5 +1,5 @@
 const University=require('../models/universityModel');
-
+const Doctor= require('../models/doctorModel')
 
 //create am university
 const createUniversity= async(req,res)=>{
@@ -10,13 +10,13 @@ const createUniversity= async(req,res)=>{
         if(excitingUniversity) res.status(401).json({message:"university already exist"});
         const newUniversity=new University({name,location,phoneNumber,logo});
         await newUniversity.save();
-        res.status(201).json(newUniversity);
+        res.status(201).json(newUniversity,{message:'university created successfully'});
 
 
      }catch(error){
-        console.log(error);
+        console.log(error); 
         res.status(500).json({message:'failed to create an university'});
-     }
+     } 
 
 };
 
@@ -99,7 +99,20 @@ const searchDoctorInUniversity = async (req, res) => {
         res.status(500).json({ message: "Failed to search for doctors" });
     }
   };
+  //get all doctors in a specific university
+
+const getDoctorsByUniversity = async (req, res) => {
+    const { universityId } = req.params;
+  
+    try {
+      const doctors = await Doctor.find({ university: universityId });
+      res.json(doctors);
+    } catch (error) {
+      console.error('Error getting doctors by university:', error);
+      res.status(500).json({ message: 'Failed to get doctors by university.' });
+    }
+  };
 
 
 
-module.exports={createUniversity, getAllUniversities, getUniversityById, searchDoctorInUniversity}
+module.exports={createUniversity, getAllUniversities,getDoctorsByUniversity, getUniversityById, searchDoctorInUniversity}

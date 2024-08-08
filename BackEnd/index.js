@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 app.use('/api/users',userRoutes);
 app.use('/api/profile',profileRoutes);
-// app.use ('/api/university',universityRoutes);
+app.use ('/api/university',universityRoutes);
 app.use('/api/doctor',doctorRoutes);
 
 
