@@ -5,8 +5,13 @@ const {createDoctor ,getAllDoctors ,getDoctorsByUniversity, searchDoctorByName, 
 
 
 
-router.post('/createdoctor',createDoctor);
-router.get('/getdoctors',getAllDoctors);
-router.get('/universities/:universityId/doctors', getDoctorsByUniversity);
-router.get('/doctors/search', searchDoctorByName);
-router.get('/doctors/searchByUniversity', searchDoctorsByUniversityName);
+
+
+router.post('/createdoctor',protectRoute,createDoctor);
+router.get('/getdoctors',protectRoute,getAllDoctors);
+router.get('/universities/:universityId/doctors', protectRoute,getDoctorsByUniversity);
+router.get('/doctors/search', protectRoute,searchDoctorByName);
+router.get('/doctors/searchByUniversity', protectRoute,searchDoctorsByUniversityName);
+
+module.exports = router;
+ 

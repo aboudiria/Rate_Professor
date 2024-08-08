@@ -5,6 +5,7 @@ require("dotenv").config()
 
 //Middleware to protect routes by checking JWT token
 const protectRoute= async (req,res,next)=>{
+
   try {
     const token= req.cookies.Jwt;
        if(!token){ 
@@ -25,3 +26,4 @@ const protectRoute= async (req,res,next)=>{
   }
 }
 module.exports=protectRoute;
+ 

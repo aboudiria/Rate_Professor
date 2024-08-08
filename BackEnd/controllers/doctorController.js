@@ -163,7 +163,41 @@ const searchDoctorsByUniversityName = async (req, res) => {
     res.status(500).json({ message: 'Failed to search for doctors by university name.' });
   }
 };
+// search doctor by name in a specific university
+const searchDoctorInUniversity = async (req, res) => {
+  const { universityId, doctorName } = req.query;
+
+  if (!universityId || !doctorName) {
+      return res.status(400).json({ message: "Provide both universityId and doctorName" });
+  }
+
+  try {
+      // Check if the university exists
+      const university = await University.findById(universityId);
+      if (!university) {
+          return res.status(404).json({ message: "University not found" });
+      }
+
+      // Search for doctors in the specified university with the given name
+      const doctors = await Doctor.find({
+          universityId: universityId,
+          name: { $regex: doctorName, $options: 'i' } // Case-insensitive search
+      });
+
+      if (doctors.length === 0) {
+          return res.status(404).json({ message: "No doctors found" });
+      }
+
+      res.json(doctors);
+
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Failed to search for doctors" });
+  }
+};
 
 
 
-module.exports = {createDoctor,getAllDoctors,getDoctorsByUniversity, searchDoctorByName, searchDoctorsByUniversityName  };
+module.exports =
+ {createDoctor,getAllDoctors,
+  getDoctorsByUniversity, searchDoctorByName, searchDoctorsByUniversityName  }; 
